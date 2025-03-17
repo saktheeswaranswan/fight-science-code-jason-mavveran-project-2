@@ -1,0 +1,327 @@
+our world has moved into a phase where
+we see new technology that fascinates us
+every day for example
+Nvidia&#39;s developed an AI that produces
+highly detailed images of human looking
+faces but the people depicted don&#39;t
+actually exist while a I created faces
+are absolutely remarkable they are also
+incredibly eerie these are faces that
+you would believe to be real people had
+you not known they were actually machine
+generated in the artistic front we have
+the drawing tool pix depicts it&#39;s an
+image to image translator where an image
+is synthesized from a drawing on a
+canvas it&#39;s pretty interesting to see
+the generated images adding texture and
+depth perception based on pencil strokes
+this type of synthesis is not only
+localized to image data in September
+2016 google&#39;s deepmind released a paper
+on wavenet it&#39;s a speech synthesizer
+that generates voices that are nearly
+indistinguishable from human speech the
+primary tool used in all of these
+applications are cans generative
+adversarial networks and that is what
+we&#39;re going to talk about today the idea
+of Ganz was conceived in 2014 by young
+good fellow so why do we use them there
+are many times where we just don&#39;t have
+enough data to create a model ganz can
+learn about your data and learn to
+synthesize or generate never-before-seen
+data to augment your data set consider
+them as an approach to unsupervised
+learning and even send me supervised
+learning I say this because
+semi-supervised learning is used when
+some of your data is labeled while the
+rest are not we may have a labelled data
+set but it may not be enough to train a
+model in this case we could generate
+unlabeled data using Ganz and so a
+semi-supervised approach is appropriate
+furthermore the generated data could
+also be just used as is like in the
+examples I mentioned before about face
+image synthesis
+so we got the generative part of Gans
+what about the adversarial part when I
+hear the term adversarial I think of
+reinforcement learning and game play so
+who exactly is competing against who a
+base again consists of two models that
+play against each other a generator and
+a discriminator think of the generator
+as the robber or more accurately the
+counterfeiter who tries to replicate the
+input data to produce counterfeit data
+or fake data the discriminator on the
+other hand is like a cob we needs to be
+able to distinguish between the real
+data which is from the data set and the
+counterfeit data which is produced by
+the generator the loss of the
+discriminator is used as the objective
+function for the generator in the next
+time around now we have six basic steps
+to train the gun so first of all is
+define the problem what exactly are we
+trying to do
+do we need to synthesize images from a
+caption or do we need to synthesize an
+image from another image or audio
+synthesis from sentences what is it the
+next thing we need to do is to define
+the architecture of your again that is
+answering questions like what is the
+generator what is the discriminator
+these are basically modeled depending on
+the complexity of the problem is it a
+multi-layer perceptron a neural network
+or a simpler model the third step is to
+train the discriminator model to
+distinguish between real and fake data
+when we speak of training we need to
+feed it both types we need to train it
+from the data in the data set and label
+it as real data and to train it against
+fake data we feed it fake data generated
+by our generator or the counterfeiter
+with the label fake data in step four we
+need to train the generator now so this
+uses the loss of the discriminator as
+the objective function to the generator
+in other words we need to modify
+parameters of the generative model to
+maximize a loss of the cop or the
+discriminator
+we then repeat the training of the
+generator and discriminator over n
+epochs after every iteration the
+generator will get better at fooling the
+discriminator finally the discriminator
+will not be able to tell the real images
+of the data set from the fabricated ones
+by the generator once the training is
+complete we synthesize data from the
+generator and this can be used to
+augment or true data set or just use as
+is because it&#39;s really cool so now we
+know the basic components of again and
+how it works that&#39;s great now let&#39;s get
+some more intuition on the loss function
+for our discriminator the discriminator
+uses a cross-entropy loss so why is that
+for one it&#39;s because that we are dealing
+with a classification model
+cross-entropy loss is a better
+performance metric than classification
+error or mean squared error MSE
+classification error computes the number
+of samples misclassified but does not
+take into account how off those
+predictions were it only cares about the
+ending classification result in
+cross-entropy loss on the other hand it
+is possible to have a model which
+misclassify samples more as a better
+model simply because when it was wrong
+it wasn&#39;t really wrong by that much
+another reason for cross-entropy loss in
+neural network architecture is to
+eliminate the vanishing gradient during
+training in other words the change in
+the weights does not become zero when
+using cross-entropy error loss and hence
+training is not stalled so to speak the
+cross entropy loss between the true
+distribution P and estimated
+distribution Q is given by this formula
+P and Q are thus vectors of M dimensions
+where m is the number of classes now a
+given sample can only belong to a single
+class so the true distribution is a one
+hot vector with one one and the rest
+zeros this is because we are certain
+that this sample belongs to a specific
+class
+the discriminator in again is a binary
+classifier it needs to classify data as
+either real or fake so in this case M is
+equal to 2 and the true distribution is
+a 1 Haunter only consisting of two terms
+so we can write the equations as shown
+this represents the loss for a single
+sample we can sum over the losses for n
+samples to get the overall loss now we
+know that half of the samples come from
+the data set and the other half is from
+the generator in other words we have
+half of the samples that follow the
+distribution of the real data and the
+other half of the samples which follow
+the distribution of the fake data from
+the generator the tilt sign represents
+is distributed as in mathematics let D
+of X be the predicted classification of
+the discriminator since we don&#39;t know
+how the samples are fed into the
+discriminator it makes sense to
+mathematically represent them as
+expectations rather than sums and so we
+end up with this form if you find it
+hard to remember which term of the
+expectation is distributed from the real
+data and which term is from the
+generator take a look at the D of X term
+this is either 0 or 1 depending on
+whether predicts the data as fake or
+real consider the first term with just D
+FX when does this term contribute to the
+loss function so it contributes a loss
+function when it is not 0 or when it is
+equal to 1 and this happens when the
+data is real the expectation of D FX
+when X is sampled from the generator
+would have been 0 and hence it isn&#39;t
+included now the reverse is true for the
+next term 1 minus D FX this term
+contributes to the loss function when it
+is 1 or when D FX is equal to 0 in other
+words when the data is fake and data is
+fake when it is sampled from the
+generator
+by the same argument the expectation of
+1 minus D FX when X is sampled from the
+real data would be 0 and hence it isn&#39;t
+included I hope that was more of a
+comprehensive explanation of the loss
+function so now I&#39;m moving on what are
+the types of Gans out there well the
+first one is the original vanilla again
+which I just outlined above but what
+about something a little more
+complicated like deep convolutional ganz
+D siegen&#39;s
+when we think of convolutional neural
+Nets we tend to think about label
+training data and supervised learning
+however DC gans demonstrate expanded use
+of convolutional neural networks in
+unsupervised learning by using CN NS in
+generators and discriminators more
+specifically consider the problem of
+generating images of faces like we see
+in Nvidia&#39;s AI the discriminator will
+take an input face image either from the
+generator or the actual data set and
+output real if it believes the image is
+that of an actual face or fake if it
+believes the face is not that of a human
+it is a binary classifier that can be
+implemented with convolutional neural
+nets the generator on the other hand
+will be given some data as input and
+we&#39;ll have to come up with a face now
+this is done through a D convolutional
+neural net the next type of gaen that we
+have our conditional gans we know the
+gans are a novel way to Train generative
+models but the type of data generated by
+the generator can be anything what if we
+input a condition that could dictate the
+type of image generated this could be
+done through conditional gans to give
+you a better example consider the Emnes
+data set which consists of images digit
+images 0 through 9
+a typical Gann would be able to generate
+random digit images but through siegen&#39;s
+we can specify a condition for the
+generated image this condition is the
+label digit in this case so by feeding
+the digit 5 to our C again we can
+generate an image with the digit 5 in it
+in other words we can direct the
+generator to synthesize specific images
+another type of Gann that we have is an
+info again so this type is not only able
+to generate images but also learn
+meaningful latent variables without any
+labels and the data one example given in
+the paper is that when an info gun is
+trained on the Emnes data set variables
+representing the type of digits 0
+through 9 the angle of the digit and the
+thickness of the stroke are all inferred
+automatically here&#39;s an example of a
+possible output when a salient variable
+is varied over every row you can see
+that as the variable value changes there
+is a difference in the thickness of the
+brushstroke another type again that we
+have is the Wasserstein Gann w Ganz one
+of the main problems of Ganz and DC Ganz
+is the objective function of the
+generator recall the objective function
+is to increase the loss of the
+discriminant but there is no clear sign
+of when to stop
+you need to keep looking at the samples
+and see if there are satisfactory enough
+to pass for real data the old method of
+minimizing generative loss was through
+minimizing a metric called the Jenson
+Shannon divergence it is a method of
+measuring the similarity between two
+probability distributions this new
+Wasserstein can however seeks to
+minimize a new metric called the
+Wasserstein distance between points in
+the probability distributions using the
+wah sourcing distance you can train the
+discriminator to convergence and this
+leads to higher quality generated data
+samples a link the main paper and a more
+accessible blog post to this in the
+description below there are many other
+ganz out there and it is a very hot
+topic of research now consider for
+example Microsoft&#39;s attention again that
+is attention generative adversarial
+Network this paper was released a few
+days ago this attention gain can create
+images from text through natural
+language processing and performs
+fine-grained tasks like generate
+parts of an image from a single word in
+the description it is able to do this
+through an attention mechanism where the
+generator focuses on generating parts of
+an image or data in high resolution and
+other parts in lower resolution as the
+context of the words becomes more known
+the surrounding parts of the image
+increase in resolution over time until
+finally we get an image that closely
+corresponds with the words in text
+there&#39;s so much fascinating technology
+sprouting from these Gans every day and
+it is an exciting topic to discuss and
+there&#39;s so much potential we&#39;ll come
+back to this topic in a future video
+I&#39;ll include a list of links to papers
+and interesting blog posts in the
+description down below I&#39;ll also include
+a cool application links like the pics
+to pics application the hand-drawn image
+synthesis tool
+thank you all for stopping by today and
+if you liked the video click that like
+button and subscribe for more content on
+data Sciences machine learning and deep
+learning did you click Subscribe please
+click Subscribe

@@ -1,0 +1,166 @@
+machine learning has changed our world
+in many ways we have different methods
+to learn training data for
+classification and regression problems
+some parametric methods like polynomial
+regression and support vector machines
+stand out as being very versatile they
+create simple linear boundaries for
+simple problems or nonlinear boundaries
+for more complex problems so the big
+question how are these algorithms so
+versatile this is due to something
+called kernelization in this video we&#39;re
+going to kernel eyes linear regression
+and show how it can be incorporated in
+other algorithms to solve complex
+problems so let&#39;s get to it
+so kernel izing linear regression let&#39;s
+start from the top this is the output of
+a linear agressor X is a vector of
+features and W is a vector of weights
+and Y is the output real number or
+classification it&#39;s a good starting
+point but the problem here is that it&#39;s
+linear too simple for many applications
+let&#39;s change that here Phi of X is a
+nonlinear basis function that adds some
+more complex features this is now the
+output of a polynomial regression note
+polynomial regression isn&#39;t the same as
+nonlinear regression Phi of X is just
+square terms cube terms and polynomial
+terms in general with this we can create
+complex models but how do we find Phi of
+X simple normally without the basis
+function and just considering the base
+features we minimize the least squares
+cost function with respect to the
+weights after vectorizing and
+simplifying you get optimal values as X
+transpose X the whole inverse times X
+transpose Y I&#39;ve made a detailed
+simplification of this in my linear
+regression video so check that out after
+this one now what we want is the weights
+for the nonlinear basis function so
+replace X with Phi want to include
+regularization just include lambda I
+lambda is regularization parameter and I
+is the identity
+matrix with Elsa regularization this is
+now Ridge regression the point of a
+parametric model is to estimate the
+value of parameters W which we can do
+only if we know Phi or at least the
+covariance matrix Phi transpose Phi but
+that&#39;s pretty hard to compute so you can
+clearly see the problem here we&#39;re going
+to do this entire thing again but this
+time with kernelization so consider our
+Ridge regression cost function J taking
+the derivative with respect to the
+weight vector and equating it to 0 we
+solve for W to make things easier to
+look at we&#39;ll call it the first part
+alpha so the weights become the dot
+product of the basis function and alpha
+once again consider the original cost
+function and vectorize and substitute
+our weight W then we just keep
+simplifying the repeated term is 5 phi
+transpose which is a square matrix
+called the gram matrix or kernel matrix
+denoted by k now we&#39;re getting to the
+juicy stuff the kernel matrix phi phi
+transpose has elements that are the dot
+products for every pair of feature
+vectors this kernel matrix is of
+significance because of two properties
+one it&#39;s symmetric so the matrix equals
+its transpose and two the kernel matrix
+is positive semi-definite so the product
+with any other vector and its transpose
+leads to a non negative solution I&#39;ll
+come back to why these properties are
+important in a bit but for now let&#39;s use
+these properties in our simplification
+of the cost function
+first off transpose a scalar term we can
+do this because scalars are symmetric we
+minimize this cost function to get the
+optimal value of alpha once we have the
+optimal alpha we can express the weights
+in terms of this kernel matrix so what&#39;s
+the difference between this set of
+weights and
+one that we computed before without
+kernels before we had to compute Phi
+transpose Phi which is the covariance
+matrix but now we need Phi Phi transpose
+the kernel matrix but wait it looks like
+to compute this inner product as well we
+still need Phi however that&#39;s actually
+not the case
+I said before this kernel matrix has two
+properties one is that it&#39;s symmetric
+and two is that it&#39;s positive
+semi-definite
+according to Mercer&#39;s theorem a
+symmetric positive semi definite
+function can be expressed as the inner
+product of some Phi in other words we
+can rewrite every term in the grand
+matrix such that it is a function of
+only the base features this is the
+kernel trick and the fundamental reason
+why kernels are so powerful I&#39;ll show
+you with an example of how this kernel
+trick works consider this polynomial
+nonlinear basis function we have the
+kernel matrix where every term is an
+inner product of two samples expanding
+these terms we can see that this inner
+product of non linear basis functions
+can be represented as a function of the
+basis vector inputs XM and xn this is an
+example of a polynomial kernel function
+thus we can compute the kernel matrix K
+without knowing the true nature of Phi
+and in the same way we can show that the
+different standard kernel functions
+don&#39;t require knowledge of the complex
+basis vector Phi so we&#39;re able to
+express the kernel matrix in terms of
+the base features that&#39;s great
+but how do we make a prediction the most
+important part
+well what we really need is W transpose
+Phi of X where X is the input base
+feature vector of the test subject and W
+is the learned weights but expanding
+this we can eliminate Phi transpose Phi
+of X by expressing it as a column vector
+of the kernel matrix effectively to make
+a prediction
+don&#39;t need to know the true nature of
+fire at all this result is significant
+as it shows it even with a complex basis
+function we can make predictions with
+only the base features this is why
+kernel based methods can be so versatile
+and are used for simple or complex
+classification problems I demonstrated
+kernel eyes linear regression in this
+video but we can kernel eyes other
+algorithms as well and that&#39;s all I have
+for you now
+so if you liked the video hit that like
+button if you&#39;re new here welcome and
+hit that subscribe button ring that bell
+for notifications when I upload and if
+you&#39;re still looking for your daily dose
+of AI click our top one of the videos
+right here on screen for another awesome
+video and I will see you in the next one
+bye

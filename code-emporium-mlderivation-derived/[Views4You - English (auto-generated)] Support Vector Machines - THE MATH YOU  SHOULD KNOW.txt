@@ -1,0 +1,252 @@
+you need to solve a classification
+problem what algorithm do you use most
+people from noobs to professionals would
+consider support vector machines but why
+is this the case why our support vector
+machines thrown around so much even
+though people don&#39;t know that much about
+it well we&#39;re going to answer that
+question and in this video we&#39;re going
+to see exactly why support vector
+machines are so versatile by getting
+into the math that powers it so let&#39;s
+get to it
+so why are support vector machines so
+versatile if you watch my last video you
+would probably already know the answer
+paralyzation
+specifically SVM makes use of the kernel
+trick to model nonlinear decision
+boundaries before we see how let&#39;s set
+the groundwork for this and understand
+what we&#39;re dealing with first what is a
+point we have a set of points we want
+classified say each point is represented
+by some feature vector X but this may be
+too simple for many applications so we
+want to map this to a more complex
+nonlinear feature space say Phi of X
+thus we have transformed the feature
+space where each of these input features
+X is mapped to a transformed basis
+vector Phi of X nice now what is a
+decision boundary the decision boundary
+is the main separator that divides these
+points into their respective classes
+this hyperplane is represented as W
+transpose 5x plus B is equal to 0 I
+write the intercept bias term separately
+in d dimensional space a hyperplane is a
+d- one-dimensional separator so in a two
+dimensional space the hyperplane is a
+one-dimensional line in 3-dimensional
+space the hyperplane is a 2d plane you
+get it now how do we represent distance
+well the distance of a line ax plus B Y
+plus C is equal to 0 from a point x0 y0
+is this in the same way we can write the
+equation of distance of a hyperplane
+from a point vector now what are we
+optimizing consider the case where data
+is perfectly separable this is when
+there exists a beast one hyperplane that
+can separate the training data groups
+with 100% accuracy
+to make things simpler we consider a
+binary classification just two groups
+let&#39;s call them the positive and
+negative group for now for this data
+there can be many hyperplanes that give
+us the same 100% accuracy but how do we
+know which is the best to choose
+intuitively we place it right down the
+center where the distance from the
+closest points is maximum this way we
+can make less mistakes during testing
+and SVM does exactly this the goal of
+SVM is to find that hyperplane that has
+the maximum margin from the closest
+points in other words the goal is to
+maximize the minimum distance it&#39;s so
+intuitive while making a prediction
+substituting any group 1 or positive
+group point in the hyperplane equation
+will lead to a value that&#39;s greater than
+0 and any group to point in the
+hyperplane equation will lead to a
+negative value since we have training
+data our labels will be +1 for the
+positive group and negative 1 for the
+negative group the product of the
+predicted label on the actual label will
+be greater than 0 if classified
+correctly otherwise it&#39;s less than 0
+since we are dealing with a perfectly
+separable data set the optimal
+hyperplane will classify all points
+correctly substituting our optimal
+values into the weight equation and
+bringing the independent weight term
+outside we get the final form the inner
+term min Y n times w transpose phi of x
+plus b represents the distance of the
+closest point to the decision boundary
+now for ease of simplification let&#39;s
+normalize this equation by this I mean
+let&#39;s rescale the distance
+of the closest point to b1 this is
+possible by multiplying some constant
+factor C to the weight vector W and the
+bias be changing the terms the vectors
+are still in the same direction and the
+margin or the hyperplane equation
+doesn&#39;t change using this back in our
+equation the second term representing
+the distance of the closest point from
+the hyperplane becomes one in other
+words any point is at least at a
+distance one from the hyperplane we also
+convert it to a minimization problem and
+introduce the half for notation
+convenience constants don&#39;t change the
+solution after all this is the primal
+formulation for perfectly separable data
+by primal form I mean the constrained
+optimization problem we just formulated
+contains the original variables of the
+problem this primal formulation is the
+first type of formulation we make based
+on intuition or the problem statement of
+course this form was constructed
+assuming the data is separable or the
+fact that all points are always
+classified correctly however in the real
+world this is almost never the case so
+instead of trying to make our classifier
+try to classify every single training
+point correctly and risk overfitting we
+allow it to make some mistakes and this
+is done by introducing for each data
+point a slack variable represented by
+the Greek letter Kasai think of it as
+credit or money you owe or a penalty for
+incorrect classification so a data point
+classified correctly will have a slack
+of 0 and a data point classified
+incorrectly will have a positive slack
+introducing Kasai
+to account for a non perfect separation
+we now have a new primal formulation two
+major changes in the optimization we
+have an extra term we can introduce
+slack for every variable but it should
+be as low as possible this is regulated
+by the hyper parameter capital C so if C
+is 0 the classifier isn&#39;t penalized by
+slack
+hence the optimize a
+can afford to use it everywhere so even
+large misclassifications would be
+acceptable the decision boundary itself
+would be linear which may lead to
+underfitting but an infinitely high C
+means that even a small slack is highly
+penalized so the classifier cannot
+afford to miss classify a data point and
+this may lead to very complex decision
+boundaries and hence overfitting so it&#39;s
+important to choose an appropriate C the
+second change is the introduction of the
+non negative slack term in the
+constraints this is an example of a
+convex quadratic optimization why the
+objective function is quadratic in W and
+the constraints are linear in W and
+Kasai however there&#39;s a problem here to
+solve this optimization we need to know
+what Phi is and so this becomes
+pointless what we need to do is rewrite
+this primal formulation in a different
+way such that it is independent of Phi
+this is because Phi has a very complex
+notation that we really don&#39;t know the
+nature of the alternate or dual
+formulation is going to make use of the
+concept we covered in our last video to
+eliminate the dependence on Phi and this
+concept is kernels for now the dual
+formulation involves rewriting the same
+problem using a different set of
+variables to solve this constraint
+optimization problem we use the method
+of LaGrange multipliers in the general
+case X is the original primal variable
+where we seek to minimize a function f
+under a set of constraints determined by
+different functions G sub I the new set
+of variables also called the Lagrange
+multipliers is a set of lambda I we now
+solve for the primal variables by
+differentiating this unconstrained
+Lagrange then we just plug it back into
+the original equation to have an
+equation of only the dual variables
+it&#39;ll be clear when we actually apply
+this reduction to our primal form for
+SVM first determine the Lagrangian then
+solve by differentiating with respect to
+the primals individually WB and Kasai
+express each primal as a function of
+dual variables the set of lambdas and
+alphas now substitute these values back
+into the Lagrangian to eliminate the
+primal variables
+and we just keep simplifying until we
+now how for a dual formulation but what
+was the point of this again we already
+had a primal form and we wanted to get
+rid of the complex Phi term we see it
+here too but this form actually doesn&#39;t
+depend on Phi how kernelization finally
+getting to the topic a kernel is
+basically a function of the base
+features X which has a property of
+symmetry and is positive semi-definite
+the inner product of these complex basis
+vectors can be represented in a simple
+function that only depends on the base
+feature vector X this is the gist of it
+but for a detailed explanation on
+kernelization check out my last video
+kernel eyes models are quite powerful we
+can substitute this kernel in our dual
+formulation and hence make it
+independent of the complex basis feature
+Phi so how our predictions made since we
+now have a dual that is much easier to
+compute we pass this through a convex
+quadratic solver so as to get the dual
+variables the set of alphas and lambdas
+when we say we want a prediction we are
+given some test feature vector X which
+isn&#39;t mapped to a complex Phi of X and
+this prediction is w transpose Phi of X
+which can be rewritten using the tools
+the prediction is completely independent
+of the complex feature basis Phi in
+other words we don&#39;t need a complex
+basis to model non-separable data well
+we just need a kernel function to the
+job you may have used the RBF or
+Gaussian kernels with SVM hope you now
+understand why that works so well man
+this video took a long time to make so
+just show some love without light gonna
+subscribe ring that bell for
+notifications if you want to watch some
+more content click one of the videos
+right here please just please support
+this Youngblood and his ventures don&#39;t
+you wanna thief skits explaining
+concepts to I can be funny yeah I can
+it&#39;s true my mom said so

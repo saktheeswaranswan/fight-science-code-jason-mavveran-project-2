@@ -1,0 +1,278 @@
+consider a few real-world problems like
+predicting the price of a house or
+determining a credit card score or
+predicting the number of subscribers
+I&#39;ll have by 2020 all of these involve
+predicting a value and are hence
+regression type problems each one of
+these problems has a set of input
+variables called covariates that are
+used to predict an output response
+variable covariates go by other names
+like features or independent variables
+and predictors the relationship between
+these input and output variables are
+determined using a statistical learning
+method specifically for regression in
+this case in this video I&#39;ll be talking
+about a parametric regression method
+called linear regression
+so parametric what is that it means that
+the learning method uses a fixed
+equation form that establishes the
+relationship between the dependent
+output variable and the independent
+covariance parametric regression models
+take the general form y is equal to f of
+X plus epsilon where Y is the predicted
+output variable f of X is an unknown
+function and epsilon is the error term
+that is independent of the covariates x
+different regression models use
+different forms of the function f in
+linear regression with one covariate X
+it takes the form beta 0 plus beta 1 X
+the parametric form has thus reduced the
+problem of finding a relationship
+between the covariates X and the
+response variable Y 2 determining two
+coefficients beta 0 and beta 1 this
+makes things a lot easier
+linear regression makes an estimate of
+these coefficients such estimates are
+represented with a hat over the variable
+so linear regressions objective is to
+determine the value of these
+coefficients based on the given data
+note that the epsilon term is not a part
+of this equation because this is the
+linear regression estimate like I said
+before epsilon is independent of X and
+it cannot be determined by regression
+analysis so in other words even if we
+were to somehow create a perfect linear
+regression model it would still have
+some error Epsilon for this reason it is
+also known as the irreducible error in
+order to estimate these coefficients we
+want to minimize the difference between
+the actual value Y and the predicted
+value by the model Y hat for every
+sample X this difference is called the
+residual error e now don&#39;t confuse this
+residual error e with the irreducible
+error epsilon by definition epsilon is a
+part of the residual error say there are
+n sample data points where the residual
+error of the sample is e I our goal now
+is to minimize the sum of squared
+residuals or RSS
+we take the squares because the
+magnitude of the error matters
+regardless of whether our model outputs
+a higher or lower prediction I rewrite
+the equation using aardman so what is
+that what argmin actually returns is the
+values of beta 0 and beta 1 that
+minimizes the residual sum of squares
+let&#39;s substitute our label estimate Y
+hat and expand the inner bracket we now
+find the stationary points by
+differentiating the RS s with respect to
+beta 0 and beta 1 separately and then
+equating both to 0 differentiating with
+respect to beta 0 we use simple
+differentiation rules we then get rid of
+the 2 we then bring all the terms that
+are not beta 0 to the other side of the
+equal sign and then we substitute the
+sum divided by the total samples and
+with their respective means we get beta
+0 hat is equal to Y bar minus beta 1 hat
+X bar where Y bar and X bar are the
+sample means now differentiate the
+original equation with respect to beta 1
+using simple partial differentiation
+rules bring the 2 onto the other side
+expand the bracket multiplying X I to
+all terms now substitute beta 0 hat that
+we found previously after some
+simplification and bringing non beta 1
+terms to the other side of the equal
+sign you get this equation replacing the
+sample sum with the respective means we
+get the final form of the coefficient
+beta 1 estimates beta 0 hat and beta 1
+hat together define the least square
+coefficient estimates now given some
+data points which are the covariates x i
+and the response variables y i we can
+determine the coefficients and plug the
+final betas into the regression equation
+after that we can compute any y given
+any unseen X like compute the price of a
+house
+given the cost-of-living index of a city
+as the covariate this is linear
+regression but most real-world problems
+have many covariates in such a case we
+would want to use the extension of
+linear regression called multiple
+regression this is another parametric
+regression method and since its
+parametric it also has a general form y
+is equal to f of X plus Epsilon
+but this time f of X takes the form of
+the sum of products of P covariance and
+coefficients that is beta 0 plus beta 1
+X 1 plus beta 2 X 2 all the way up to
+beta P X P so the estimated value of the
+response variable Y is given by this
+equation this is exactly the same as was
+with the case of linear regression with
+just more covariance to compute the
+response variable for a given sample
+iteratively we would need P minus 1
+multiplications and P minus 1 additions
+so for n data samples with P covariance
+each we would thus have n times P minus
+1 the whole square such operations
+however when dealing with such a large
+number of values and operations
+computers tend to perform more
+efficiently with matrices so we&#39;ll
+represent multiple regression in its
+matrix form I&#39;ll use the convention that
+any matrix or vector is both faced in
+order to distinguish them from scalar
+quantities as shown from a multiple
+regression equation we can see that Y is
+equal to X beta plus epsilon and Y hat
+is equal to X beta hat here Y is an N
+cross 1 matrix or an n dimensional
+column vector X is an n cross P plus 1
+matrix it&#39;s P plus 1 and not P because
+of the additional intercept multiplicand
+which we take as 1 beta is AP plus 1
+dimensional column vector and epsilon is
+an N dimensional column vector we know
+this relationship is correct by
+substituting
+the values and performing matrix
+multiplication and additions in place we
+can verify this relationship by
+substituting the values and performing
+matrix multiplications and additions you
+can see that each entry of the vector
+takes the multiple regression equation
+form okay so now the question is given
+this matrix form how do we compute the
+coefficients well it&#39;s exactly the same
+way that we did for linear regression
+that is minimizing the least squares
+criterion but this time for matrices
+remember how we did that before we need
+to minimize the sum of squares of
+residuals so let&#39;s consider the matrix
+form of the residuals e it&#39;s pretty easy
+to show that it is an n-dimensional
+vector form which isn&#39;t much different
+from its scalar form it is the vector of
+residuals for all n samples this is also
+equivalent to the difference between the
+vectors y and y hat the residual sum of
+squares can be re-written as a product
+of e transpose times e we now replace e
+with y minus y hat and then Y hat with X
+beta hat we can then expand the matrix
+transpose remember that a B transpose is
+B transpose times a transpose we
+multiply the terms to get rid of the
+brackets as with the least squares
+method for scalar values the goal is to
+find the value of beta that minimizes
+this RSS before we go there though I&#39;ll
+touch up a bit on matrix calculus
+specifically differentiation if X is an
+M cross 1 vector and a is an n cross M
+matrix that is independent of X then we
+can use the following few formulae if we
+have some Y that is equal to a then the
+partial derivative of Y with respect to
+X is 0 if we have some Y that is equal
+to a times X then the derivative of Y
+with respect to X is just the matrix a
+now if we have it the other way around
+then it is a transpose
+and the last rule is that if we have y
+equal to x transpose ax then it&#39;s
+partial derivative with respect to X is
+2x transpose times a we&#39;ll use these
+four formulae for minimizing the RSS
+recall that a stationary point
+corresponding to a minima is formed when
+the slope at that point with respect to
+a variable is 0 so we need to find the
+estimate beta for which the partial
+derivative of RSS with respect to beta
+hat is 0 we expand the partial
+derivatives to every term the first term
+is independent of X so their derivative
+is 0 the second term has the second
+formula form of Y is equal to a beta hat
+so its derivative is just a that is y
+transpose X in this case the third term
+is of the form Y is equal to beta hat a
+so the derivative is a transpose or X
+transpose Y the whole transpose and we
+have the last term that has a form Y is
+equal to X transpose ax so the
+derivative is 2 beta transpose a or 2
+beta hat transpose X transpose X we
+expend the transpose and then put the
+negative terms on to the other side we
+now cancel the 2 from both sides and
+apply X transpose X inverse on both
+sides and finally we take the transpose
+on both sides just to get the beta hat
+term on the Left
+note that X transpose X is symmetric so
+transposing the product square matrix
+doesn&#39;t really change its value and in
+the end we are left with beta hat is
+equal to X transpose X the whole inverse
+times X transpose Y what I can do now is
+give you a set of sample features and
+labels then you can estimate the
+coefficients determine the unknown
+equation f of X and use this to predict
+the value y hat such as like in the case
+of determining the price of a house but
+this time not only based on the cost of
+living index
+but also on say crime rate population
+distance to the closest supermarket and
+a host of any other features you want or
+any other features that you think is
+relevant of course assuming that there
+exists a linear relationship between a
+predictor and a response variable is
+usually an oversimplification such rigid
+regression is the very definition of a
+high bias problem which in turn means a
+higher mean squared error will discuss
+more flexible methods in the future
+videos however understanding these
+fundamentals of exactly how coefficients
+are estimated is important as we delve
+further into statistical modeling and
+well that&#39;s all I have for you now hope
+you guys know a little more about linear
+and multiple regression if you thought
+this content was useful share it with
+your friend you know the one that has
+the stats exam tomorrow is trying to
+binge watch YouTube tutorials yeah
+subscribe to my channel for more amazing
+content and I&#39;ll see you in the next one
+bye

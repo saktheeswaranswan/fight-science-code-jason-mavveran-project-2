@@ -1,0 +1,201 @@
+hey guys in this video we&#39;re gonna take
+a look at a statistical learning method
+for classification called logistic
+regression in a nutshell I would say
+logistic regression is linear regression
+but for classification problems in
+supervised learning I created a video on
+linear regression not too long ago check
+it out if you already haven&#39;t the link
+will be down in the description below or
+on the info card on the top so why can&#39;t
+we use linear regression in
+classification problems
+so consider the multi-class
+classification problem of determining
+the weather as sunny cloudy partially
+cloudy or rainy and say that we&#39;ve
+encoded them with values 0 1 2 &amp; 3
+respectively however this would imply
+that the difference between sunny and
+cloudy is the same as that of rainy and
+partially cloudy and like so this
+doesn&#39;t really make any sense
+so encoding it in this way for
+multi-class classification in linear
+regression is ruled out well then a
+question that comes up is if we can&#39;t
+use it for multi-class classification
+what about the simplest case like for
+binary classification can&#39;t we use
+linear regression for such predictions
+well even for binary classification some
+predicted values may lie outside 0 &amp; 1
+rendering their predictions useless
+instead of predicting the values of the
+response variable as 0 or 1 we will
+predict the probability of the response
+variable being 1 or 0 we cannot use
+linear regression techniques since our
+regression line may predict some values
+below 0 and others above 1 which makes
+no sense we instead want to make sure
+that the curve fitted makes the range of
+response variable Y belong to 0 1 and
+the covariant X belonging to well
+negative infinity to positive infinity
+so ya logistic regression
+the name logistic regression is a
+misnomer this statistical method is not
+used to model regression problems we use
+it to solve classification the term
+logistic refers to the log odds
+probability that is modeled the term
+odds is defined as the ratio of the
+probability that an event occurs to the
+probability that it doesn&#39;t occur let&#39;s
+consider the conditional probability Y
+is equal to 1 given X abbreviated as PF
+X note that one here is not the number
+but rather the class or category so as
+mentioned before we need to model a
+probability using a curve where the
+predictor domain X can be anything and
+the range of P of X or the conditional
+probability that Y is true given X is
+between 0 &amp; 1 there are many ways to
+accomplish this logistic regression uses
+the logistic function actually a sigmoid
+function to be specific to accomplish
+this so using this function we get an
+s-shaped curve let us write this
+function in a more admissible form the
+left term is the log odds or the logit
+so a graph of the logit versus x gives
+us a linear curve so let&#39;s talk about
+parameter estimation the goal of
+learning in machine learning is
+basically to estimate parameters in
+order to make predictions the parameters
+in the equation of a two class
+classification in logistic regression is
+the beta hat vector as in the log odds
+equation like called the least squares
+method is used to estimate parameters in
+linear regression and fit a model
+logistic regression uses the maximum
+likelihood method for parameter
+estimation in Emilee we take all the
+training data and split it up into two
+groups based on their labels say their 0
+&amp; 1 for every sample with label 1 the
+goal is to estimate the vector beta hat
+such that P of X hat is as close to 1 as
+possible
+for the sample group with the label zero
+the goal is to estimate beta hat such
+that P FX hat is as close to zero as
+much as possible in other words 1 minus
+P FX hat should be as close to 1 as it
+could possibly be mathematically for
+every sample with label 1 we want to
+estimate beta hat such that the product
+of all conditional probabilities of
+class 1 samples is as close to 1 as
+possible this is the maximum value of
+the product similarly for the samples
+labeled 0 we want to estimate beta hat
+such that the product of the complement
+of their conditional probabilities is as
+close to 1 as possible that is the
+maximum value note that X I here
+represents the feature vector for the
+I&#39;d sample on combining these
+requirements we want to find the beta
+parameters such that the product of both
+of these products is maximum over all
+elements of the data set this function
+that we need to optimize is called the
+likelihood function we can then combine
+the products now we can take the log
+likelihood and convert this into a
+summation so here the small L represents
+the log likelihood let&#39;s substitute P FX
+with its exponent form we now group the
+coefficients of Y I continue
+simplification of both terms
+and now we end up with the final form of
+the log-likelihood function which is to
+be optimized the goal is to find the
+value of beta that maximizes this
+function this final likelihood equation
+consists of non algebraic terms like
+logarithms and exponents such equations
+are also called transcendental equations
+and cannot be computed exactly
+however we could use numerical methods
+to approximate a solution so for now we
+can consider the newton-raphson approach
+this involves the first two terms of the
+Taylor series expansion we need to
+compute this for T iterations then beta
+will eventually converge to the
+approximate coefficient vector the
+newton-raphson equation involves
+computing the gradient with respect to
+beta so let&#39;s determine this gradient we
+bring the gradient symbol into the
+summation as a derivative of sum is the
+same as the sum of derivatives the same
+applies within the brackets we multiply
+the second term with e to the power of
+negative beta X I now we replace the
+x-men in term with the corresponding
+conditional probability term and now we
+take X I common to get the final form of
+the log-likelihood gradient so this is
+the numerator term of the newton-raphson
+equation now we compute the denominator
+term called the Hessian matrix this is a
+matrix of second order derivatives with
+respect to beta coefficients it is
+essentially the gradient of the previous
+equation we bring the gradient into the
+summation remove Y as it is independent
+of beta replace P of X with its beta
+equivalent apply the gradient take the
+negative sign out and replace it back
+with P FX
+now that we have the gradient vector and
+the Hessian matrix let&#39;s try to convert
+them both into their matrix
+representation so the gradient vector
+becomes X transpose times y minus y hat
+the Hessian matrix is negative X
+transpose times P times 1 minus P times
+X now if we take P times 1 minus P as
+the diagonal matrix W then the Hessian
+matrix becomes negative X transpose W X
+plugging these two terms into the
+newton-raphson equation we get a final
+form now we just have to execute this
+for a number of iterations T until the
+value of beta converges once the
+coefficients have been estimated we can
+then plug in the values of some feature
+vector X to estimate the probability of
+it belonging to a specific class we
+should choose a threshold hyper
+parameter above which it is class 1 and
+below which it is class 0 note that the
+newton-raphson method is just one method
+of approximation we could have used a
+secant Moeller&#39;s or any other
+appropriate numerical method
+so that&#39;s logistic regression for you I
+hope this video cleared some things up
+if you like what you saw just on love
+with a like and subscribe for more
+awesome content and I will see you in
+the next one bye
+you
